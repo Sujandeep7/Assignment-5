@@ -6,9 +6,8 @@
 *
 * Name: Sujadeep Krishna Shrestha Student ID: 139745202 Date: 21/03/2023st
 *
-* Cyclic Web App URL: ________________________________________________________
-*
-* GitHub Repository URL: ______________________________________________________
+* Cyclic Web App URL: https://erin-smoggy-ox.cyclic.app
+* GitHub Repository URL: https://github.com/Sujandeep7/web322-app
 *
 ********************************************************************************/
 
