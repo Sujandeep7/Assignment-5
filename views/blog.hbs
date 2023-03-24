@@ -1,0 +1,39 @@
+{{#if data.post}}
+  <article>
+    <header>
+      <h2>{{data.post.title}}</h2>
+      <img src="{{data.post.featureImage}}" alt="{{data.post.title}}" />
+    </header>
+    <div class="post-content">
+      {{{safeHTML data.post.body}}}
+      <br /><br />
+      Category:
+      {{data.post.category}}<br />
+      Last Updated:
+      {{data.post.postDate}}
+    </div>
+    {{#if data.posts}}
+      <h4>Posts</h4>
+      <ul>
+        {{#each data.posts}}
+          <li><a
+              href="/blog/{{this.id}}?category={{this.category}}"
+            >{{this.title}}</a></li>
+        {{/each}}
+      </ul>
+    {{/if}}
+    {{#if data.categories}}
+      <h4>Categories</h4>
+      <ul>
+        {{#each data.categories}}
+          <li><a href="/blog?category={{this.id}}">{{this.category}}</a></li>
+        {{/each}}
+      </ul>
+    {{/if}}
+  </article>
+{{else}}
+  <div class="col-md-12 text-center">
+    <h2>{{data.message}}</h2>
+    <p>Please try another Post / Category</p>
+  </div>
+{{/if}}

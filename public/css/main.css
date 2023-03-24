@@ -1,0 +1,12 @@
+*{
+    font-family: 'Segoe UI', sans-serif, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue';
+  }
+
+  p{
+      line-height: 1.75;
+      margin-bottom: 32px;
+  }
+
+  ul.nav li a{
+      font-size: 14px;
+  }
