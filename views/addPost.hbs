@@ -80,6 +80,16 @@
           </div>
 
         </fieldset>
+        {{#if categories}}
+          <select class="form-control" name="category" id="category">
+            <option value="">Select Category</option>
+            {{#each categories}}
+              <option value="{{id}}">{{category}}</option>
+            {{/each}}
+          </select>
+        {{else}}
+          <div>No Categories</div>
+        {{/if}}
 
         <hr />
 

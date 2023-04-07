@@ -1,5 +1,5 @@
 /*********************************************************************************
-* WEB322 – Assignment 04
+* WEB322 – Assignment 05
 * I declare that this assignment is my own work in accordance with Seneca Academic Policy. No part
 * of this assignment has been copied manually or electronically from any other source
 * (including 3rd party web sites) or distributed to other students.
@@ -20,12 +20,14 @@ var stripJs = require("strip-js");
 
 const app = express();
 
+app.use(express.urlencoded({ extended: true }));
+
 const HTTP_PORT = process.env.PORT || 8081;
 
 cloudinary.config({
-  cloud_name: "cloud_name",
-  api_key: "api_key",
-  api_secret: "api_secret",
+  cloud_name: "dbaowjxf2",
+  api_key: "477372483434312",
+  api_secret: "JTddoV3X7bbVsbyNmGYO4fKcQiI",
   secure: true,
 });
 
@@ -208,8 +210,10 @@ app.get("/posts", (req, res) => {
   queryPromise
     .then((data) => {
       console.log(data);
-
-      res.render("posts", { posts: data });
+      if (data.length > 0)
+        res.render("posts", { posts: data });
+      else
+        res.render("posts", { message: "no results" });
     })
     .catch((err) => {
       res.render("posts", { message: "no results" });
@@ -278,11 +282,49 @@ app.get("/categories", (req, res) => {
   blogData
     .getCategories()
     .then((data) => {
-      res.render("category", { categories: data });
+      if (data.length > 0)
+        res.render("category", { categories: data });
+      else {
+        res.render("category", { message: "no results" });
+      }
     })
     .catch((err) => {
-      res.render("posts", { message: "no results" });
+      res.render("category", { message: "no results" });
     });
+});
+
+app.get('/categories/add', (req, res) => {
+  res.render('addCategory');
+});
+
+app.post('/categories/add', async (req, res) => {
+  try {
+    await blogData.addCategory(req.body);
+    res.redirect('/categories');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Unable to add category');
+  }
+});
+
+app.get('/categories/delete/:id', async (req, res) => {
+  try {
+    await blogData.deleteCategoryById(req.params.id);
+    res.redirect('/categories');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Unable to Remove Category / Category not found');
+  }
+});
+
+app.get('/posts/delete/:id', async (req, res) => {
+  try {
+    await blogData.deletePostById(req.params.id);
+    res.redirect('/posts');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Unable to Remove Post / Post not found');
+  }
 });
 
 app.use((req, res) => {
